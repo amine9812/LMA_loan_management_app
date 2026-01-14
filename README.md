@@ -1,6 +1,9 @@
 # CovenantPulse - Loan Covenant and Obligation Compliance WEB/Desktop App
 
 CovenantPulse turns complex loan agreements into structured obligations, covenant calculations, borrower submissions, lender review workflows, alerts, audit trails, and exportable reporting - all offline in a desktop app.
+## Demo
+
+![App demo](LMA_DEMO.gif)
 
 ## Highlights
 - Loan workspace creation, document ingestion, clause tagging, and obligation scheduling

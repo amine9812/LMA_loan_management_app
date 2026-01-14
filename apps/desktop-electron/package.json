@@ -1,0 +1,78 @@
+{
+  "name": "covenantpulse-desktop",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/main/index.js",
+  "description": "CovenantPulse desktop app",
+  "scripts": {
+    "build:packages": "npm run build -w @covenantpulse/shared && npm run build -w @covenantpulse/core && npm run build -w @covenantpulse/db",
+    "dev": "npm run build:packages && concurrently -k \"npm run dev:renderer\" \"npm run dev:main\" \"npm run dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:main": "tsc -p tsconfig.main.json -w",
+    "dev:electron": "wait-on dist/main/index.js http://localhost:5190 && cross-env VITE_DEV_SERVER_URL=http://localhost:5190 ELECTRON_RUN_AS_NODE= electron dist/main/index.js",
+    "build": "npm run build:packages && tsc -p tsconfig.main.json && vite build",
+    "package": "npm run build && electron-builder",
+    "test": "vitest run && playwright test",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "@covenantpulse/core": "0.0.1",
+    "@covenantpulse/db": "0.0.1",
+    "@covenantpulse/shared": "0.0.1",
+    "@tanstack/react-query": "^5.51.1",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^12.6.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "pdfjs-dist": "^4.6.82",
+    "pdfkit": "^0.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.10.2",
+    "@types/pdfkit": "^0.13.6",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "electron": "31.7.7",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.7",
+    "tsx": "^4.19.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1",
+    "vitest": "^2.0.5",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.covenantpulse.desktop",
+    "productName": "CovenantPulse",
+    "directories": {
+      "output": "dist/packages",
+      "buildResources": "resources"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "resources",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Loan Obligation Schema v0.1",
+  "type": "object",
+  "required": [
+    "meta",
+    "loan",
+    "parties",
+    "documents",
+    "clauses",
+    "obligations",
+    "obligationInstances",
+    "formulas",
+    "covenants",
+    "covenantResults",
+    "waivers"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["schemaVersion", "exportedAt", "appVersion"],
+      "properties": {
+        "schemaVersion": { "type": "string", "enum": ["0.1"] },
+        "exportedAt": { "type": "string" },
+        "appVersion": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "loan": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "borrowerName",
+        "lenderName",
+        "currency",
+        "startDate",
+        "status"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "borrowerName": { "type": "string" },
+        "lenderName": { "type": "string" },
+        "currency": { "type": "string" },
+        "startDate": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "parties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "partyType", "name"],
+        "properties": {
+          "id": { "type": "string" },
+          "partyType": { "type": "string" },
+          "name": { "type": "string" },
+          "contactEmail": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "filename", "sha256", "uploadedAt"],
+        "properties": {
+          "id": { "type": "string" },
+          "filename": { "type": "string" },
+          "sha256": { "type": "string" },
+          "uploadedAt": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "clauses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "title",
+          "snippet",
+          "page",
+          "tags",
+          "sourceDocumentId"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "title": { "type": "string" },
+          "snippet": { "type": "string" },
+          "page": { "type": "integer" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "sourceDocumentId": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "obligations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "frequency",
+          "dueRule",
+          "ownerParty",
+          "severity",
+          "status",
+          "sourceClauseId",
+          "createdAt"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "frequency": { "type": "string" },
+          "dueRule": { "type": "object" },
+          "ownerParty": { "type": "string" },
+          "severity": { "type": "string" },
+          "status": { "type": "string" },
+          "sourceClauseId": { "type": ["string", "null"] },
+          "createdAt": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "obligationInstances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "obligationId", "dueDate", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "obligationId": { "type": "string" },
+          "periodStart": { "type": ["string", "null"] },
+          "periodEnd": { "type": ["string", "null"] },
+          "dueDate": { "type": "string" },
+          "status": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "formulas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "key", "name", "expression", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "key": { "type": "string" },
+          "name": { "type": "string" },
+          "expression": { "type": "object" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "covenants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "covenantType",
+          "formulaId",
+          "thresholdOp",
+          "thresholdValue",
+          "frequency",
+          "status",
+          "sourceClauseId"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "covenantType": { "type": "string" },
+          "formulaId": { "type": "string" },
+          "thresholdOp": { "type": "string" },
+          "thresholdValue": { "type": "number" },
+          "frequency": { "type": "string" },
+          "status": { "type": "string" },
+          "sourceClauseId": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "covenantResults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "covenantId",
+          "computedValue",
+          "thresholdValue",
+          "passFail",
+          "computedAt",
+          "computedBy"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "covenantId": { "type": "string" },
+          "periodStart": { "type": ["string", "null"] },
+          "periodEnd": { "type": ["string", "null"] },
+          "computedValue": { "type": "number" },
+          "thresholdValue": { "type": "number" },
+          "passFail": { "type": "string" },
+          "computedAt": { "type": "string" },
+          "computedBy": { "type": "string" },
+          "notes": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "waivers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "relatedType",
+          "relatedId",
+          "reason",
+          "requestedBy",
+          "status"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "relatedType": { "type": "string" },
+          "relatedId": { "type": "string" },
+          "reason": { "type": "string" },
+          "requestedBy": { "type": "string" },
+          "status": { "type": "string" },
+          "decidedBy": { "type": ["string", "null"] },
+          "decidedAt": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "auditEvents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "actorUserId", "action", "entityType", "entityId", "createdAt"],
+        "properties": {
+          "id": { "type": "string" },
+          "actorUserId": { "type": "string" },
+          "action": { "type": "string" },
+          "entityType": { "type": "string" },
+          "entityId": { "type": "string" },
+          "beforeJson": { "type": ["string", "null"] },
+          "afterJson": { "type": ["string", "null"] },
+          "createdAt": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

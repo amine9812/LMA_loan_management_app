@@ -1,0 +1,17 @@
+{
+  "name": "@covenantpulse/db",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "better-sqlite3": "^12.6.0",
+    "@covenantpulse/shared": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  }
+}

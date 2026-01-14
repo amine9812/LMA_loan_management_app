@@ -1,0 +1,10 @@
+node_modules/
+dist/
+apps/desktop-electron/node_modules/
+apps/desktop-electron/dist/
+packages/*/dist/
+*.log
+*.sqlite
+.DS_Store
+coverage/
+playwright-report/

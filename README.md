@@ -2,7 +2,7 @@
 
 CovenantPulse turns complex loan agreements into structured obligations, covenant calculations, borrower submissions, lender review workflows, alerts, audit trails, and exportable reporting - all offline in a desktop app.
 ## Demo
-
+https://amine9812.github.io/LMA_loan_management_app/
 ![App demo](LMA_DEMO.gif)
 
 ## Highlights
